@@ -3,8 +3,8 @@ const bcrypt = require("bcryptjs");
 const Patient = require("../models/Patient");
 const Therapist = require("../models/Therapist");
 
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+const generateToken = (id,role) => {
+  return jwt.sign({ id,role }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
 // Register Patient
@@ -14,7 +14,7 @@ exports.registerPatient = async (req, res) => {
     const existingPatient = await Patient.findOne({ email });
     if (existingPatient) return res.status(400).json({ message: "Patient already exists" });
 
-    const patient = await Patient.create({
+    const user = await Patient.create({
       name,
       age,
       dob,
@@ -25,7 +25,7 @@ exports.registerPatient = async (req, res) => {
       currentSymptoms: currentSymptoms.split(","),
     });
 
-    res.status(201).json({ message: "Patient registered", token: generateToken(patient._id) });
+    res.status(201).json({ message: "Patient registered", token: generateToken(user._id,"patient") });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -49,7 +49,7 @@ exports.registerTherapist = async (req, res) => {
       yearsOfExperience,
     });
 
-    res.status(201).json({ message: "Therapist registered", token: generateToken(therapist._id) });
+    res.status(201).json({ message: "Therapist registered", token: generateToken(therapist._id,"therapist") });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -59,16 +59,16 @@ exports.registerTherapist = async (req, res) => {
 exports.loginPatient = async (req, res) => {
     const { email, password } = req.body;
     try {
-      const patient = await Patient.findOne({ email });
+      const user = await Patient.findOne({ email });
   
-      if (!patient) return res.status(404).json({ message: "Patient not found" });
+      if (!user) return res.status(404).json({ message: "Patient not found" });
   
-      const isMatch = await bcrypt.compare(password, patient.password);
+      const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
   
       res.json({
-        token: generateToken(patient._id),
-        user: { id: patient._id, name: patient.name, email: patient.email },
+        token: generateToken(user._id,"patient"),
+        user: { id: user._id, name: user.name, email: user.email },
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -87,10 +87,12 @@ exports.loginPatient = async (req, res) => {
       if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
   
       res.json({
-        token: generateToken(therapist._id),
+        token: generateToken(therapist._id,"therapist"),
         user: { id: therapist._id, name: therapist.name, email: therapist.email },
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   };
+
+  

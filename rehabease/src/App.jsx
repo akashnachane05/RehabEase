@@ -17,7 +17,8 @@ import VideoTutorialPage from './pages/VideoTutorialPage';
 import AppointmentPage from './pages/AppointmentPage';
 import ExercisePlanCreatorPage from './pages/ExercisePlanCreatorPage';
 import PatientProgressPage from './pages/PatientProgressPage';
-
+import PatientProfilePage from './pages/PatientProfilePage';
+import TherapistProfile from './pages/TherapistProfile';
 function App() {
   return (
     <Router>
@@ -40,6 +41,8 @@ function App() {
             <Route path="/appointments" element={<AppointmentPage />} />
             <Route path="/create-exercise-plan" element={<ExercisePlanCreatorPage />} />
             <Route path="/patient-progress" element={<PatientProgressPage />} />
+            <Route path="/patients/profile" element={<PatientProfilePage/>}/>
+            <Route path="/therapist/profile" element={<TherapistProfile/>}/>
           </Routes>
         </main>
         <Footer />

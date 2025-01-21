@@ -14,16 +14,23 @@ function LoginPage() {
 
     try {
       // Send login credentials to backend for authentication
-      const response = await axios.post('http://localhost:5000/api/patients/login', {
-        email,
-        password,
+      // const response = await axios.post('http://localhost:5000/api/patients/login', {
+      //   email,
+      //   password,
+      // });
+      const response = await fetch('http://localhost:5000/api/patients/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
+      const data = await response.json();
+
 
       // Assuming the backend sends a JWT token on successful login
-      const { token } = response.data;
+      
       
       // Save the token to localStorage (or sessionStorage, as needed)
-      localStorage.setItem('authToken', token);
+      localStorage.setItem('authToken', data.token);
 
       // Redirect user to a different page (e.g., dashboard) after successful login
       // You can use React Router's `useNavigate()` to navigate
