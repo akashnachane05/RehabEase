@@ -1,91 +1,98 @@
-import { useState, useEffect, useRef } from "react"
-import axios from "axios"
-import io from "socket.io-client"
-import { Send, Smile, Paperclip } from "lucide-react"
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import io from "socket.io-client";
+import { Send, Smile, Paperclip } from "lucide-react";
 
+// Initialize Socket Connection
 const socket = io("http://localhost:5000", {
-  auth: { token: localStorage.getItem('authToken') }
-})
+  auth: { token: localStorage.getItem("authToken") },
+  reconnection: true,
+  reconnectionAttempts: 5
+});
 
 const Chat = ({ patient, therapist }) => {
-  const [messages, setMessages] = useState([])
-  const [newMessage, setNewMessage] = useState("")
-  const [isTyping, setIsTyping] = useState(false)
-  const messagesEndRef = useRef(null)
-  
-  // Get current user info from localStorage
-  const currentUser = JSON.parse(localStorage.getItem('user'))
-  
-  // Determine sender and recipient details
-  const senderId = currentUser?._id
-  const senderType = currentUser?.role
-  const recipientId = patient?._id || therapist?._id
-  const recipientType = patient ? 'Patient' : 'Therapist'
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef(null);
 
+  // Get current user from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const senderId = currentUser?._id;
+  const senderType = currentUser?.role;
+  const recipientId = patient?._id || therapist?._id;
+  const recipientType = patient ? "Patient" : "Therapist";
+
+  // Scroll to latest message
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    // Fetch chat history when component mounts
+    // Fetch Chat History
     const fetchChatHistory = async () => {
       try {
         const response = await axios.get(
           `http://localhost:5000/api/chat/${recipientId}/${recipientType}`,
-          {
-            headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }
-          }
-        )
-        setMessages(response.data.messages)
+          { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } }
+        );
+        console.log("Chat History:", response.data.messages);
+        setMessages(response.data.messages);
       } catch (error) {
-        console.error("Error fetching chat history:", error)
+        console.error("Error fetching chat history:", error);
       }
-    }
+    };
 
     if (recipientId) {
-      fetchChatHistory()
+      fetchChatHistory();
     }
 
-    // Socket event listeners
+    // Socket Event Listeners
     socket.on("receiveMessage", (message) => {
-      setMessages((prevMessages) => [...prevMessages, message])
-    })
+      console.log("Received message:", message);
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
 
     socket.on("userTyping", (data) => {
       if (data.sender === recipientId) {
-        setIsTyping(true)
-        setTimeout(() => setIsTyping(false), 3000)
+        setIsTyping(true);
+        setTimeout(() => setIsTyping(false), 3000);
       }
-    })
+    });
 
     return () => {
-      socket.off("receiveMessage")
-      socket.off("userTyping")
-    }
-  }, [recipientId, recipientType])
+      socket.off("receiveMessage");
+      socket.off("userTyping");
+    };
+  }, [recipientId, recipientType]);
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   const sendMessage = (e) => {
-    e.preventDefault()
-    if (!newMessage.trim()) return
+    e.preventDefault();
+    if (!newMessage.trim()) return;
 
     const messageData = {
+      sender: senderId,
+      senderType: senderType,
       recipient: recipientId,
       recipientType: recipientType,
-      text: newMessage
-    }
+      text: newMessage,
+      timestamp: new Date().toISOString()
+    };
 
-    socket.emit("sendMessage", messageData)
-    setNewMessage("")
-  }
+    console.log("Sending message:", messageData);
+    socket.emit("sendMessage", messageData);
+    setMessages((prevMessages) => [...prevMessages, messageData]);
+    setNewMessage("");
+  };
 
   const handleTyping = (e) => {
-    setNewMessage(e.target.value)
-    socket.emit("typing", { sender: senderId, recipient: recipientId })
-  }
+    setNewMessage(e.target.value);
+    socket.emit("typing", { sender: senderId, recipient: recipientId });
+  };
 
   return (
     <div className="flex flex-col h-[500px] bg-white rounded-lg shadow-xl">
@@ -101,11 +108,11 @@ const Chat = ({ patient, therapist }) => {
         {messages.map((msg, index) => (
           <div
             key={msg._id || index}
-            className={`flex ${msg.sender === currentUserId ? "justify-end" : "justify-start"} mb-4`}
+            className={`flex ${msg.sender === senderId ? "justify-end" : "justify-start"} mb-4`}
           >
             <div
               className={`max-w-[70%] px-4 py-2 rounded-2xl ${
-                msg.sender === currentUserId
+                msg.sender === senderId
                   ? "bg-blue-500 text-white rounded-br-none"
                   : "bg-gray-100 text-gray-800 rounded-bl-none"
               }`}
@@ -166,8 +173,7 @@ const Chat = ({ patient, therapist }) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Chat
-
+export default Chat;
