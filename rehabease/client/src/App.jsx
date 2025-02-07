@@ -12,9 +12,6 @@ import TherapistLoginPage from './pages/TherapistLoginPage';
 import TherapistRegisterPage from './pages/TherapistRegisterPage';
 import PatientDashboard from './pages/PatientDashboard';
 import TherapistDashboard from './pages/TherapistDashboard';
-import VideoTutorialPage from './pages/VideoTutorialPage';
-import AppointmentPage from './pages/AppointmentPage';
-import PatientProgressPage from './pages/PatientProgressPage';
 import PatientProfilePage from './pages/PatientProfilePage';
 import TherapistProfile from './pages/TherapistProfile';
 import ExerciseLibrary from './pages/ExerciseLibrary';
@@ -56,9 +53,6 @@ const Main = () => {
           <Route path="/patient/dashboard" element={<PatientDashboard />} />
           <Route path="/therapist/dashboard" element={<TherapistDashboard />} />
           <Route path="/exercise" element={<ExerciseLibrary />} />
-          <Route path="/video-tutorials" element={<VideoTutorialPage />} />
-          <Route path="/appointments" element={<AppointmentPage />} />
-          <Route path="/patient-progress" element={<PatientProgressPage />} />
           <Route path="/patients/profile" element={<PatientProfilePage />} />
           <Route path="/therapist/profile" element={<TherapistProfile />} />
           <Route path="/therapist/patients" element={<PatientProfiles />} />
