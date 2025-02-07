@@ -13,7 +13,8 @@ function Header() {
     '/appointments',
     '/patient-progress',
     '/patients/profile',
-    '/patient/therapist'
+    '/patient/therapist',
+    '/request'
   ];
   const therapistRoutes = [
     '/therapist/dashboard',

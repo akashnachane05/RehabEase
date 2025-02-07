@@ -46,7 +46,7 @@ const ExerciseCard = ({ exercise }) => {
           <CardFooter>
             <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
               <DialogTrigger asChild>
-                <Button aria-label={`Start ${exercise.name} exercise video`}>Start Exercise</Button>
+                <Button aria-label={`Start ${exercise.name} exercise video`}>Watch Tutorial</Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[800px]">
                 <DialogHeader>

@@ -24,13 +24,18 @@ import {
   Legend,
 } from "chart.js";
 import axios from "axios";
+import io from "socket.io-client";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
 
 const PatientDashboard = () => {
   const [userSymptoms, setUserSymptoms] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [showAddExerciseForm, setShowAddExerciseForm] = useState(false);
+  const [feedback, setFeedback] = useState([]);
+  const [repCount, setRepCount] = useState(0);
+  const [setCount, setSetCount] = useState(0);
 
   const progressData = {
     labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
@@ -43,6 +48,49 @@ const PatientDashboard = () => {
       },
     ],
   };
+
+  
+  useEffect(() => {
+    // Chatbot script injection
+    const script = document.createElement("script")
+    script.innerHTML = `
+      (function () {
+        if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+          window.chatbase = (...arguments) => {
+            if (!window.chatbase.q) {
+              window.chatbase.q = [];
+            }
+            window.chatbase.q.push(arguments);
+          };
+          window.chatbase = new Proxy(window.chatbase, {
+            get(target, prop) {
+              if (prop === "q") {
+                return target.q;
+              }
+              return (...args) => target(prop, ...args);
+            },
+          });
+        }
+        const onLoad = function () {
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.id = "HZp1GgRFGKTnZ9jM0cdem";
+          script.domain = "www.chatbase.co";
+          document.body.appendChild(script);
+        };
+        if (document.readyState === "complete") {
+          onLoad();
+        } else {
+          window.addEventListener("load", onLoad);
+        }
+      })();
+    `
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchUserSymptoms = async () => {
@@ -113,7 +161,6 @@ const PatientDashboard = () => {
 
     fetchExercises();
   }, [userSymptoms]);
-
   const handleAddExerciseClick = () => {
     setShowAddExerciseForm(true);
   };
@@ -122,9 +169,10 @@ const PatientDashboard = () => {
     setShowAddExerciseForm(false);
   };
 
+
   return (
     <div className="container mx-auto px-4 py-8 relative">
-      <h1 className="text-3xl font-bold mb-8">Welcome back, John</h1>
+      <h1 className="text-3xl font-bold mb-8">Welcome back !!</h1>
 
       {/* Add Exercise Button (Top Right Corner) */}
       <div className="absolute top-4 right-4">
@@ -185,7 +233,7 @@ const PatientDashboard = () => {
       {/* Today's Exercises */}
       <div className="grid md:grid-cols-1 gap-8 mb-8">
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4">Today's Exercises</h2>
+          <h2 className="text-2xl font-semibold mb-4">Recommended Exercises</h2>
           {recommendations.length > 0 ? (
             <ul className="space-y-4">
               <ExerciseList recommendations={recommendations} />
@@ -201,11 +249,11 @@ const PatientDashboard = () => {
         <h2 className="text-2xl font-semibold mb-4">Resources</h2>
         <div className="grid md:grid-cols-3 gap-4">
           <Link
-            to="/video-tutorials"
+            to="/request"
             className="flex items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200"
           >
             <Video className="w-6 h-6 mr-2 text-blue-500" />
-            <span>Video Tutorials</span>
+            <span>Start Exercise</span>
           </Link>
           <Link
             to="/exercise"
