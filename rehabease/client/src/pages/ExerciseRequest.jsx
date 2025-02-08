@@ -24,6 +24,11 @@ const FeedbackPanel = ({ feedback, repCount, setCount }) => {
                     Deviation: <span className="font-semibold">{feedback.deviation}°</span>
                   </span>
                 )}
+                {feedback.accuracy !== undefined && (
+                  <span className="text-gray-600">
+                    Accuracy: <span className="font-semibold">{feedback.accuracy}%</span>
+                  </span>
+                )}
               </div>
             </div>
           ) : (
@@ -86,6 +91,7 @@ const ExerciseList = () => {
         current_value: data.current_value,
         deviation: data.deviation,
         feedback_msg: data.message,
+        accuracy : data.accuracy
       })
     })
 

@@ -10,8 +10,8 @@
               "joints": {
                 "shoulder_angle": {
                   "landmarks": [11, 12, 14],
-                  "ideal_angle": 60,
-                  "threshold": 40,
+                  "ideal_angle": 30,
+                  "threshold": 15,
                   "direction": "circular"
                 }
               },
@@ -59,7 +59,7 @@
               "joints": {
                 "shoulder_rotation": {
                   "landmarks": [11, 13, 15],
-                  "ideal_angle": 45,
+                  "ideal_angle": 30,
                   "threshold": 10
                 }
               },

@@ -5,21 +5,23 @@ import mediapipe as mp
 import numpy as np
 import json
 import time
-from pipeline1 import process_exercise  # Import exercise processing function
+import datetime
+import google.generativeai as genai
+from pipeline import process_exercise
+import re
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Global Variables
 cap = None
 pose = mp.solutions.pose.Pose()
 rep_count, set_count, rep_started = 0, 0, False
+correct_reps, incorrect_reps = 0, 0
 current_exercise = None
 exercises_data = {}
 
 
 def load_exercise_data():
-    """Load exercises from exercises.json."""
     global exercises_data
     try:
         with open("exercises.json", "r") as file:
@@ -30,72 +32,55 @@ def load_exercise_data():
 
 
 def open_webcam():
-    """Try multiple camera indices and warm up the webcam."""
-    for cam_index in range(3):  # Try indices 0, 1, 2
-        cap = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)  # CAP_DSHOW fixes issues on Windows
+    for cam_index in range(3):
+        cap = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)
         if cap.isOpened():
             print(f"✅ Webcam opened at index {cam_index}")
-            time.sleep(2)  # Allow the camera to initialize
+            time.sleep(2)
             return cap
         cap.release()
-    
     print("❌ No available webcam found!")
     return None
 
 
-@app.route('/api/start-exercise', methods=['GET', 'POST'])
+@app.route('/api/start-exercise', methods=['POST'])
 def start_exercise():
-    """Start an exercise session via POST request. GET will return the current exercise."""
-    global cap, current_exercise, rep_count, set_count, rep_started
-
+    global cap, current_exercise, rep_count, set_count, rep_started, correct_reps, incorrect_reps
+    
     load_exercise_data()
     if not exercises_data:
         return jsonify({"success": False, "message": "Exercise data not found!"}), 500
 
-    if request.method == "POST":
-        data = request.json
-        exercise_name = data.get("exercise_name")
+    data = request.json
+    exercise_name = data.get("exercise_name")
+    if not exercise_name:
+        return jsonify({"success": False, "message": "No exercise specified!"}), 400
 
-        if not exercise_name:
-            return jsonify({"success": False, "message": "No exercise specified!"}), 400
-
-        # Search for the exercise in the JSON data
-        found = False
-        for category in exercises_data.get("exercises", []):
-            for exercise in category.get("exercises", []):
-                if exercise["name"] == exercise_name:
-                    current_exercise = exercise
-                    found = True
-                    break
-            if found:
+    found = False
+    for category in exercises_data.get("exercises", []):
+        for exercise in category.get("exercises", []):
+            if exercise["name"] == exercise_name:
+                current_exercise = exercise
+                found = True
                 break
+        if found:
+            break
 
-        if not found:
-            return jsonify({"success": False, "message": "Exercise not found!"}), 404
+    if not found:
+        return jsonify({"success": False, "message": "Exercise not found!"}), 404
 
-        # Reset session variables
-        rep_count, set_count, rep_started = 0, 0, False
+    rep_count, set_count, rep_started, correct_reps, incorrect_reps = 0, 0, False, 0, 0
+    cap = open_webcam()
+    if cap is None:
+        return jsonify({"success": False, "message": "Webcam access failed!"}), 500
 
-        # Open the webcam
-        cap = open_webcam()
-        if cap is None:
-            return jsonify({"success": False, "message": "Webcam access failed!"}), 500
-
-        socketio.start_background_task(process_exercise_stream)
-
-        return jsonify({"success": True, "message": f"Exercise '{current_exercise['name']}' started!"})
-
-    # If GET request, return the last started exercise
-    if current_exercise:
-        return jsonify({"success": True, "exercise_name": current_exercise["name"]})
-
-    return jsonify({"success": False, "message": "No exercise started yet!"}), 404
+    socketio.start_background_task(process_exercise_stream)
+    return jsonify({"success": True, "message": f"Exercise '{current_exercise['name']}' started!"})
 
 
 def process_exercise_stream():
-    """Processes webcam frames and sends real-time feedback via SocketIO."""
-    global cap, current_exercise, rep_count, set_count, rep_started
-
+    global cap, current_exercise, rep_count, set_count, rep_started, correct_reps, incorrect_reps
+    
     if cap is None or current_exercise is None:
         print("❌ Error: Webcam or exercise data unavailable!")
         return
@@ -109,8 +94,8 @@ def process_exercise_stream():
         frame = cv2.flip(frame, 1)
         height, width, _ = frame.shape
 
-        frame, feedback_msgs, rep_count, set_count, rep_started, completed = process_exercise(
-            socketio, pose, current_exercise, frame, width, height, rep_count, set_count, rep_started
+        frame, feedback_msgs, rep_count, set_count, rep_started, correct_reps, incorrect_reps, completed = process_exercise(
+            socketio, pose, current_exercise, frame, width, height, rep_count, set_count, rep_started, correct_reps, incorrect_reps
         )
 
         _, buffer = cv2.imencode('.jpg', frame)
@@ -118,7 +103,6 @@ def process_exercise_stream():
         socketio.emit("video_frame", frame_bytes)
 
         cv2.imshow("Exercise Feedback", frame)
-
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q") or completed:
             break
@@ -126,6 +110,42 @@ def process_exercise_stream():
     cap.release()
     cv2.destroyAllWindows()
     print("✅ Exercise session ended!")
+    generate_final_report()
+
+
+def generate_final_report():
+    report_data = {
+        "timestamp": datetime.datetime.now().isoformat(),
+        "exercise_name": current_exercise["name"],
+        "sets": set_count,
+        "reps": rep_count,
+        "accuracy": round((correct_reps / correct_reps + incorrect_reps * 100) if rep_count > 0 else 100, 2),
+        }
+    
+    genai.configure(api_key="AIzaSyBDMYAX4pPgl0XO9wUwIEatNI3EdgHmYeU")
+    prompt = f"""
+    Generate a summary for the following exercise session like an actual therapist. Provide proper feedback, 
+    highlight improvements required, and summarize in simple terms so a user can easily understand. Generate just one paragraph in short:
+    {json.dumps(report_data, indent=4)}
+    """
+    model = genai.GenerativeModel("gemini-pro")
+    response = model.generate_content(prompt)
+    report_data["summary"] = response.text if response.text else "No valid response received."
+    filename = "final_exercise_report.json"
+    try:
+        with open(filename, "r") as f:
+            reports = json.load(f)
+        if not isinstance(reports, list):
+            reports = [reports]
+    except (FileNotFoundError, json.JSONDecodeError):
+        reports = []
+
+    reports.append(report_data)
+    with open(filename, "w") as f:
+        json.dump(reports, f, indent=4)
+
+    print("✅ Final report generated and saved!")
+    socketio.emit("final_report", report_data)
 
 
 if __name__ == '__main__':
