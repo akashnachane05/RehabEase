@@ -25,13 +25,19 @@ function LoginPage() {
       });
       const data = await response.json();
 
+      // check if the response is successful, if yes then login if no raise error
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to login');
+      }
+
+
 
       // Assuming the backend sends a JWT token on successful login
       
       
       // Save the token to localStorage (or sessionStorage, as needed)
       localStorage.setItem('authToken', data.token);
-
+     
       // Redirect user to a different page (e.g., dashboard) after successful login
       // You can use React Router's `useNavigate()` to navigate
       navigate('/patient/dashboard');
