@@ -1,0 +1,26 @@
+{
+  "name": "rehabease",
+  "version": "1.0.0",
+  "description": "Virtual_rehab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "cd backend && npm i && nodemon server.js",
+    "client": "cd client && npm i && npm run dev",
+    "dev": "concurrently -k  \"npm run backend\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akashnachane05/HackathonProject.git"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "socket.io-client": "^4.8.1"
+  },
+  "author": "Akash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akashnachane05/HackathonProject/issues"
+  },
+  "homepage": "https://github.com/akashnachane05/HackathonProject#readme"
+}
