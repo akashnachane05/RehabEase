@@ -9,7 +9,7 @@ const axios = require("axios"); // For calling Flask API
 const Message = require('./models/Message'); // Import the Message model
 const jwt = require('jsonwebtoken');
 const verifyToken = require('./middlewares/authMiddleware');
-
+fs = require('fs');
 dotenv.config();
 
 const app = express();
@@ -36,19 +36,20 @@ app.use("/api/therapists", therapistRoutes);
 app.use("/api/chat", chatRoutes);
 
 // Start Exercise Route - Calls Flask API
-app.get("/api/start-exercise", async (req, res) => {
-    try {
-        console.log("Starting exercise session...");
-        const response = await axios.get("http://127.0.0.1:5000/api/start-exercise");
-        res.json(response.data);
-    } catch (error) {
-        console.error("Error starting exercise processing:", error.response?.data || error.message);
-        res.status(500).json({ success: false, message: "Failed to start exercise" });
-    }
-});
+// app.get("/api/start-exercise", async (req, res) => {
+//     try {
+//         console.log("Starting exercise session...");
+//         const response = await axios.get("http://127.0.0.1:5000/api/start-exercise");
+//         res.json(response.data);
+//     } catch (error) {
+//         console.error("Error starting exercise processing:", error.response?.data || error.message);
+//         res.status(500).json({ success: false, message: "Failed to start exercise" });
+//     }
+// });
 app.post("/api/start-exercise", async (req, res) => {
   try {
       const { exercise_name } = req.body;
+    
 
       if (!exercise_name) {
           return res.status(400).json({ success: false, message: "Exercise name required!" });
@@ -61,6 +62,16 @@ app.post("/api/start-exercise", async (req, res) => {
       console.error("Error starting specific exercise:", error.response?.data || error.message);
       res.status(500).json({ success: false, message: "Failed to start exercise" });
   }
+});
+
+app.get("/exercise-report", (req, res) => {
+  const filePath =  "../AI/final_exercise_report.json" // Adjust path as per folder structure
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Failed to read file" });
+    }
+    res.json(JSON.parse(data));
+  });
 });
 
 // Connect to MongoDB

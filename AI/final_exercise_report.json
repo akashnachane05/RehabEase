@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2025-02-08T23:45:22.441350",
+        "exercise_name": "Pendulum Swings",
+        "sets": 3,
+        "reps": 9,
+        "accuracy": 88.89,
+        "summary": "Your Pendulum Swing exercise session on February 8th, 2025, demonstrated good form with an accuracy of 88.89%. Throughout the session, you completed a total of 27 repetitions in 3 sets. While your accuracy was commendable, we can work together to improve your technique and potentially increase that accuracy rate even higher. Keep up the great work, and let's discuss specific areas for improvement during our next session."
+    },
+    {
+        "timestamp": "2025-02-08T23:51:55.559487",
+        "exercise_name": "Pendulum Swings",
+        "sets": 0,
+        "reps": 1,
+        "accuracy": 0.0,
+        "summary": "Today's Pendulum Swing session shows room for improvement. It's great that you completed one rep. However, it's recommended to increase the number of sets to 3-5, with 10-12 reps each. Additionally, focusing on accuracy will help improve the effectiveness of the exercise. Try maintaining a steady rhythm and controlling the range of motion for better results. Remember, consistency is key, so keep up the good work and track your progress to monitor improvements."
+    },
+    {
+        "timestamp": "2025-02-09T00:13:07.941963",
+        "exercise_name": "Pendulum Swings",
+        "sets": 1,
+        "reps": 4,
+        "accuracy": 50.0,
+        "summary": "Your exercise session shows that you have completed 1 set of Pendulum Swings with 4 repetitions. Your accuracy was 50%. While you have made a good attempt, your accuracy could be improved. Accuracy measures how close your movements are to the ideal form. To improve your accuracy, pay attention to your body alignment and ensure you are following the correct technique. Continue practicing regularly, focusing on precision, and you will see progress over time."
+    }
+]

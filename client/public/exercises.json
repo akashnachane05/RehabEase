@@ -1,639 +1,814 @@
 {
-    "exercises": [
+  "exercises": [
       {
-        "category": "Shoulder Rehabilitation",
-        "exercises": [
-          {
-            "name": "Pendulum Swings",
-            "description": "Lean forward and let your arm hang down. Swing your arm gently in small circles.",
-            "parameters": {
-              "joints": {
-                "shoulder_angle": {
-                  "landmarks": [11, 12, 14],
-                  "ideal_angle": 60,
-                  "threshold": 40,
-                  "direction": "circular"
-                }
+          "category": "Shoulder Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Pendulum Swings",
+                  "description": "Lean forward and let your arm hang down. Swing your arm gently in small circles.",
+                  "parameters": {
+                      "joints": {
+                          "shoulder_angle": {
+                              "landmarks": [
+                                  11,
+                                  12,
+                                  14
+                              ],
+                              "ideal_angle": 60,
+                              "threshold": 40,
+                              "direction": "circular"
+                          }
+                      },
+                      "feedback": {
+                          "shoulder_angle": "Reduce swing radius by {deviation}\u00b0 (Current: {current_angle}\u00b0, Ideal: 60\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=K0mJrtPRpHE"
               },
-              "feedback": {
-                "shoulder_angle": "Reduce swing radius by {deviation}° (Current: {current_angle}°, Ideal: 60°)"
-              }
-            }
-          },
-          {
-            "name": "Shoulder Blade Squeezes",
-            "description": "Sit or stand with arms at your sides. Squeeze your shoulder blades together.",
-            "parameters": {
-              "joints": {
-                "scapular_distance": {
-                  "landmarks": [11, 12],
-                  "ideal_distance": 15,
-                  "threshold": 5
-                }
+              {
+                  "name": "Shoulder Blade Squeezes",
+                  "description": "Sit or stand with arms at your sides. Squeeze your shoulder blades together.",
+                  "parameters": {
+                      "joints": {
+                          "scapular_distance": {
+                              "landmarks": [
+                                  11,
+                                  12
+                              ],
+                              "ideal_distance": 15,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "scapular_distance": "Squeeze shoulder blades {deviation}cm tighter (Current: {current_distance}cm)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=2IDWClhWq_c"
               },
-              "feedback": {
-                "scapular_distance": "Squeeze shoulder blades {deviation}cm tighter (Current: {current_distance}cm)"
-              }
-            }
-          },
-          {
-            "name": "Wall Push-Ups",
-            "description": "Stand facing a wall, place your hands on the wall, and perform push-ups.",
-            "parameters": {
-              "joints": {
-                "elbow_angle": {
-                  "landmarks": [13, 11, 15],
-                  "ideal_angle": 90,
-                  "threshold": 20
-                }
+              {
+                  "name": "Wall Push-Ups",
+                  "description": "Stand facing a wall, place your hands on the wall, and perform push-ups.",
+                  "parameters": {
+                      "joints": {
+                          "elbow_angle": {
+                              "landmarks": [
+                                  13,
+                                  11,
+                                  15
+                              ],
+                              "ideal_angle": 90,
+                              "threshold": 20
+                          }
+                      },
+                      "feedback": {
+                          "elbow_angle": "Maintain a 90\u00b0 bend (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=IODxDxX7oi4"
               },
-              "feedback": {
-                "elbow_angle": "Maintain a 90° bend (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Shoulder External Rotation with Resistance Band",
-            "description": "Hold a resistance band and rotate your arm outward.",
-            "parameters": {
-              "joints": {
-                "shoulder_rotation": {
-                  "landmarks": [11, 13, 15],
-                  "ideal_angle": 45,
-                  "threshold": 10
-                }
+              {
+                  "name": "Shoulder External Rotation with Resistance Band",
+                  "description": "Hold a resistance band and rotate your arm outward.",
+                  "parameters": {
+                      "joints": {
+                          "shoulder_rotation": {
+                              "landmarks": [
+                                  11,
+                                  13,
+                                  15
+                              ],
+                              "ideal_angle": 45,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "shoulder_rotation": "Rotate {deviation}\u00b0 further outward (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=UsvfQB3p_6w"
               },
-              "feedback": {
-                "shoulder_rotation": "Rotate {deviation}° further outward (Current: {current_angle}°)"
+              {
+                  "name": "Arm Circles",
+                  "description": "Extend your arms to the sides and make small circles.",
+                  "parameters": {
+                      "joints": {
+                          "arm_elevation": {
+                              "landmarks": [
+                                  11,
+                                  12,
+                                  15
+                              ],
+                              "ideal_angle": 90,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "arm_elevation": "Keep arms at shoulder height (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=v-LnV5YfG5I"
               }
-            }
-          },
-          {
-            "name": "Arm Circles",
-            "description": "Extend your arms to the sides and make small circles.",
-            "parameters": {
-              "joints": {
-                "arm_elevation": {
-                  "landmarks": [11, 12, 15],
-                  "ideal_angle": 90,
-                  "threshold": 15
-                }
-              },
-              "feedback": {
-                "arm_elevation": "Keep arms at shoulder height (Current: {current_angle}°)"
-              }
-            }
-          }
-        ]
+          ]
       },
       {
-        "category": "Knee Rehabilitation",
-        "exercises": [
-          {
-            "name": "Straight Leg Raises",
-            "description": "Lie on your back, keep one leg straight, and lift it to the height of the other knee.",
-            "parameters": {
-              "joints": {
-                "knee_extension": {
-                  "landmarks": [25, 26, 27],
-                  "ideal_angle": 180,
-                  "threshold": 10
-                },
-                "hip_flexion": {
-                  "landmarks": [23, 24, 25],
-                  "ideal_angle": 45,
-                  "threshold": 10
-                }
+          "category": "Knee Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Straight Leg Raises",
+                  "description": "Lie on your back, keep one leg straight, and lift it to the height of the other knee.",
+                  "parameters": {
+                      "joints": {
+                          "knee_extension": {
+                              "landmarks": [
+                                  25,
+                                  26,
+                                  27
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 10
+                          },
+                          "hip_flexion": {
+                              "landmarks": [
+                                  23,
+                                  24,
+                                  25
+                              ],
+                              "ideal_angle": 45,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "knee_extension": "Keep knee straight (Deviation: {deviation}\u00b0)",
+                          "hip_flexion": "Lift leg {deviation}\u00b0 higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=RkOq3cDQXWk"
               },
-              "feedback": {
-                "knee_extension": "Keep knee straight (Deviation: {deviation}°)",
-                "hip_flexion": "Lift leg {deviation}° higher (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Heel Slides",
-            "description": "Lie on your back, slide your heel toward your buttocks, and then slide it back.",
-            "parameters": {
-              "joints": {
-                "knee_flexion": {
-                  "landmarks": [23, 25, 27],
-                  "ideal_angle": 120,
-                  "threshold": 15
-                }
+              {
+                  "name": "Heel Slides",
+                  "description": "Lie on your back, slide your heel toward your buttocks, and then slide it back.",
+                  "parameters": {
+                      "joints": {
+                          "knee_flexion": {
+                              "landmarks": [
+                                  23,
+                                  25,
+                                  27
+                              ],
+                              "ideal_angle": 120,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "knee_flexion": "Slide {deviation}\u00b0 further (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=U2lyFLvU0ic"
               },
-              "feedback": {
-                "knee_flexion": "Slide {deviation}° further (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Mini Squats",
-            "description": "Stand with your feet shoulder-width apart and perform shallow squats.",
-            "parameters": {
-              "joints": {
-                "knee_flexion": {
-                  "landmarks": [23, 25, 27],
-                  "ideal_angle": 45,
-                  "threshold": 10
-                }
+              {
+                  "name": "Mini Squats",
+                  "description": "Stand with your feet shoulder-width apart and perform shallow squats.",
+                  "parameters": {
+                      "joints": {
+                          "knee_flexion": {
+                              "landmarks": [
+                                  23,
+                                  25,
+                                  27
+                              ],
+                              "ideal_angle": 45,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "knee_flexion": "Don\u2019t bend beyond 45\u00b0 (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=Znc0l7Y-yxg"
               },
-              "feedback": {
-                "knee_flexion": "Don’t bend beyond 45° (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Step-Ups",
-            "description": "Step onto a low platform with one leg and bring the other leg up.",
-            "parameters": {
-              "joints": {
-                "knee_extension": {
-                  "landmarks": [25, 26, 27],
-                  "ideal_angle": 180,
-                  "threshold": 5
-                }
+              {
+                  "name": "Step-Ups",
+                  "description": "Step onto a low platform with one leg and bring the other leg up.",
+                  "parameters": {
+                      "joints": {
+                          "knee_extension": {
+                              "landmarks": [
+                                  25,
+                                  26,
+                                  27
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "knee_extension": "Fully extend knee at the top (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=3-2q8w2ZJfE"
               },
-              "feedback": {
-                "knee_extension": "Fully extend knee at the top (Current: {current_angle}°)"
+              {
+                  "name": "Terminal Knee Extensions",
+                  "description": "Sit with a resistance band around your knee and straighten your leg.",
+                  "parameters": {
+                      "joints": {
+                          "knee_extension": {
+                              "landmarks": [
+                                  25,
+                                  26,
+                                  27
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "knee_extension": "Push {deviation}\u00b0 further (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=HG6eBQ0Cf_Q"
               }
-            }
-          },
-          {
-            "name": "Terminal Knee Extensions",
-            "description": "Sit with a resistance band around your knee and straighten your leg.",
-            "parameters": {
-              "joints": {
-                "knee_extension": {
-                  "landmarks": [25, 26, 27],
-                  "ideal_angle": 180,
-                  "threshold": 5
-                }
-              },
-              "feedback": {
-                "knee_extension": "Push {deviation}° further (Current: {current_angle}°)"
-              }
-            }
-          }
-        ]
+          ]
       },
       {
-        "category": "Hip Rehabilitation",
-        "exercises": [
-          {
-            "name": "Clamshells",
-            "description": "Lie on your side, bend your knees, and lift the top knee while keeping your feet together.",
-            "parameters": {
-              "joints": {
-                "hip_abduction": {
-                  "landmarks": [23, 24, 26],
-                  "ideal_angle": 45,
-                  "threshold": 10
-                }
+          "category": "Hip Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Clamshells",
+                  "description": "Lie on your side, bend your knees, and lift the top knee while keeping your feet together.",
+                  "parameters": {
+                      "joints": {
+                          "hip_abduction": {
+                              "landmarks": [
+                                  23,
+                                  24,
+                                  26
+                              ],
+                              "ideal_angle": 45,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "hip_abduction": "Lift knee {deviation}\u00b0 higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=52FfjxT-3OM"
               },
-              "feedback": {
-                "hip_abduction": "Lift knee {deviation}° higher (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Hip Bridges",
-            "description": "Lie on your back, bend your knees, and lift your hips.",
-            "parameters": {
-              "joints": {
-                "hip_extension": {
-                  "landmarks": [23, 25, 27],
-                  "ideal_angle": 30,
-                  "threshold": 10
-                }
+              {
+                  "name": "Hip Bridges",
+                  "description": "Lie on your back, bend your knees, and lift your hips.",
+                  "parameters": {
+                      "joints": {
+                          "hip_extension": {
+                              "landmarks": [
+                                  23,
+                                  25,
+                                  27
+                              ],
+                              "ideal_angle": 30,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "hip_extension": "Lift hips {deviation}\u00b0 higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=8bbE64NuDTU"
               },
-              "feedback": {
-                "hip_extension": "Lift hips {deviation}° higher (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Side-Lying Leg Raises",
-            "description": "Lie on your side and lift the top leg straight up.",
-            "parameters": {
-              "joints": {
-                "hip_abduction": {
-                  "landmarks": [23, 25, 27],
-                  "ideal_angle": 40,
-                  "threshold": 10
-                }
+              {
+                  "name": "Side-Lying Leg Raises",
+                  "description": "Lie on your side and lift the top leg straight up.",
+                  "parameters": {
+                      "joints": {
+                          "hip_abduction": {
+                              "landmarks": [
+                                  23,
+                                  25,
+                                  27
+                              ],
+                              "ideal_angle": 40,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "hip_abduction": "Raise leg {deviation}\u00b0 higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=2q8oRJFXUqM"
               },
-              "feedback": {
-                "hip_abduction": "Raise leg {deviation}° higher (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Hip Flexor Stretch",
-            "description": "Kneel on one knee and push your hips forward.",
-            "parameters": {
-              "joints": {
-                "hip_flexion": {
-                  "landmarks": [23, 24, 25],
-                  "ideal_angle": 120,
-                  "threshold": 15
-                }
+              {
+                  "name": "Hip Flexor Stretch",
+                  "description": "Kneel on one knee and push your hips forward.",
+                  "parameters": {
+                      "joints": {
+                          "hip_flexion": {
+                              "landmarks": [
+                                  23,
+                                  24,
+                                  25
+                              ],
+                              "ideal_angle": 120,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "hip_flexion": "Push hips forward {deviation}\u00b0 further (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=XqLYvU_yMIk"
               },
-              "feedback": {
-                "hip_flexion": "Push hips forward {deviation}° further (Current: {current_angle}°)"
+              {
+                  "name": "Standing Hip Abduction",
+                  "description": "Stand and lift one leg to the side.",
+                  "parameters": {
+                      "joints": {
+                          "hip_abduction": {
+                              "landmarks": [
+                                  23,
+                                  25,
+                                  27
+                              ],
+                              "ideal_angle": 30,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "hip_abduction": "Lift leg sideways {deviation}\u00b0 higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=3BmtSld_vA4"
               }
-            }
-          },
-          {
-            "name": "Standing Hip Abduction",
-            "description": "Stand and lift one leg to the side.",
-            "parameters": {
-              "joints": {
-                "hip_abduction": {
-                  "landmarks": [23, 25, 27],
-                  "ideal_angle": 30,
-                  "threshold": 10
-                }
-              },
-              "feedback": {
-                "hip_abduction": "Lift leg sideways {deviation}° higher (Current: {current_angle}°)"
-              }
-            }
-          }
-        ]
+          ]
       },
       {
-        "category": "Ankle and Foot Rehabilitation",
-        "exercises": [
-          {
-            "name": "Ankle Pumps",
-            "description": "Sit or lie down and move your foot up and down.",
-            "parameters": {
-              "joints": {
-                "ankle_dorsiflexion": {
-                  "landmarks": [27, 25, 31],
-                  "ideal_angle": 20,
-                  "threshold": 5
-                }
+          "category": "Ankle and Foot Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Ankle Pumps",
+                  "description": "Sit or lie down and move your foot up and down.",
+                  "parameters": {
+                      "joints": {
+                          "ankle_dorsiflexion": {
+                              "landmarks": [
+                                  27,
+                                  25,
+                                  31
+                              ],
+                              "ideal_angle": 20,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "ankle_dorsiflexion": "Point toes {deviation}\u00b0 further (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=bSpI0pr_jG8"
               },
-              "feedback": {
-                "ankle_dorsiflexion": "Point toes {deviation}° further (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Toe Curls with a Towel",
-            "description": "Place a towel on the floor and curl your toes to pull it toward you.",
-            "parameters": {
-              "joints": {
-                "toe_flexion": {
-                  "landmarks": [31, 32, 33],
-                  "ideal_angle": 25,
-                  "threshold": 5
-                }
+              {
+                  "name": "Toe Curls with a Towel",
+                  "description": "Place a towel on the floor and curl your toes to pull it toward you.",
+                  "parameters": {
+                      "joints": {
+                          "toe_flexion": {
+                              "landmarks": [
+                                  31,
+                                  32,
+                                  33
+                              ],
+                              "ideal_angle": 25,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "toe_flexion": "Curl toes {deviation}\u00b0 tighter (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=1m4otE8sNOs"
               },
-              "feedback": {
-                "toe_flexion": "Curl toes {deviation}° tighter (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Heel Raises",
-            "description": "Stand and lift your heels off the ground.",
-            "parameters": {
-              "joints": {
-                "ankle_plantarflexion": {
-                  "landmarks": [27, 25, 31],
-                  "ideal_angle": 15,
-                  "threshold": 5
-                }
+              {
+                  "name": "Heel Raises",
+                  "description": "Stand and lift your heels off the ground.",
+                  "parameters": {
+                      "joints": {
+                          "ankle_plantarflexion": {
+                              "landmarks": [
+                                  27,
+                                  25,
+                                  31
+                              ],
+                              "ideal_angle": 15,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "ankle_plantarflexion": "Raise heels {deviation}\u00b0 higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=EMxdwBssYlM"
               },
-              "feedback": {
-                "ankle_plantarflexion": "Raise heels {deviation}° higher (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Ankle Alphabet",
-            "description": "Sit and trace the alphabet with your toes.",
-            "parameters": {
-              "joints": {
-                "ankle_range": {
-                  "landmarks": [27, 25, 31],
-                  "ideal_angle": 360,
-                  "threshold": 20
-                }
+              {
+                  "name": "Ankle Alphabet",
+                  "description": "Sit and trace the alphabet with your toes.",
+                  "parameters": {
+                      "joints": {
+                          "ankle_range": {
+                              "landmarks": [
+                                  27,
+                                  25,
+                                  31
+                              ],
+                              "ideal_angle": 360,
+                              "threshold": 20
+                          }
+                      },
+                      "feedback": {
+                          "ankle_range": "Complete full range of motion; adjust by {deviation}\u00b0 if needed (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=oa6ZvSd3axM"
               },
-              "feedback": {
-                "ankle_range": "Complete full range of motion; adjust by {deviation}° if needed (Current: {current_angle}°)"
+              {
+                  "name": "Single-Leg Balance",
+                  "description": "Stand on one leg for 30 seconds.",
+                  "parameters": {
+                      "joints": {
+                          "balance": {
+                              "landmarks": [
+                                  25,
+                                  27
+                              ],
+                              "ideal_stability": true,
+                              "threshold": 0
+                          }
+                      },
+                      "feedback": {
+                          "balance": "Maintain stable balance; adjust posture as needed"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=zqFR5KDNRM4"
               }
-            }
-          },
-          {
-            "name": "Single-Leg Balance",
-            "description": "Stand on one leg for 30 seconds.",
-            "parameters": {
-              "joints": {
-                "balance": {
-                  "landmarks": [25, 27],
-                  "ideal_stability": true,
-                  "threshold": 0
-                }
-              },
-              "feedback": {
-                "balance": "Maintain stable balance; adjust posture as needed"
-              }
-            }
-          }
-        ]
+          ]
       },
       {
-        "category": "Core and Back Rehabilitation",
-        "exercises": [
-          {
-            "name": "Bird-Dog Exercise",
-            "description": "On all fours, extend one arm and the opposite leg.",
-            "parameters": {
-              "joints": {
-                "spinal_alignment": {
-                  "landmarks": [11, 23, 25],
-                  "ideal_angle": 180,
-                  "threshold": 10
-                }
+          "category": "Core and Back Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Bird-Dog Exercise",
+                  "description": "On all fours, extend one arm and the opposite leg.",
+                  "parameters": {
+                      "joints": {
+                          "spinal_alignment": {
+                              "landmarks": [
+                                  11,
+                                  23,
+                                  25
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "spinal_alignment": "Keep back straight (Deviation: {deviation}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=wiFNA3sqjCA"
               },
-              "feedback": {
-                "spinal_alignment": "Keep back straight (Deviation: {deviation}°)"
-              }
-            }
-          },
-          {
-            "name": "Pelvic Tilts",
-            "description": "Lie on your back, tilt your pelvis upward, and flatten your lower back.",
-            "parameters": {
-              "joints": {
-                "pelvic_tilt": {
-                  "landmarks": [11, 23, 27],
-                  "ideal_angle": 15,
-                  "threshold": 5
-                }
+              {
+                  "name": "Pelvic Tilts",
+                  "description": "Lie on your back, tilt your pelvis upward, and flatten your lower back.",
+                  "parameters": {
+                      "joints": {
+                          "pelvic_tilt": {
+                              "landmarks": [
+                                  11,
+                                  23,
+                                  27
+                              ],
+                              "ideal_angle": 15,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "pelvic_tilt": "Tilt pelvis {deviation}\u00b0 more (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=8B8VMbQbpQs"
               },
-              "feedback": {
-                "pelvic_tilt": "Tilt pelvis {deviation}° more (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Dead Bug Exercise",
-            "description": "Lie on your back, lift your legs and arms, and alternate lowering them.",
-            "parameters": {
-              "joints": {
-                "core_stability": {
-                  "landmarks": [11, 25, 15],
-                  "ideal_value": 0,
-                  "threshold": 5
-                }
+              {
+                  "name": "Dead Bug Exercise",
+                  "description": "Lie on your back, lift your legs and arms, and alternate lowering them.",
+                  "parameters": {
+                      "joints": {
+                          "core_stability": {
+                              "landmarks": [
+                                  11,
+                                  25,
+                                  15
+                              ],
+                              "ideal_value": 0,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "core_stability": "Maintain core engagement; adjust by {deviation} units"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=PsJhSgaQI_A"
               },
-              "feedback": {
-                "core_stability": "Maintain core engagement; adjust by {deviation} units"
-              }
-            }
-          },
-          {
-            "name": "Plank",
-            "description": "Hold a plank position on your elbows and toes.",
-            "parameters": {
-              "joints": {
-                "spinal_alignment": {
-                  "landmarks": [11, 23, 27],
-                  "ideal_angle": 180,
-                  "threshold": 10
-                }
+              {
+                  "name": "Plank",
+                  "description": "Hold a plank position on your elbows and toes.",
+                  "parameters": {
+                      "joints": {
+                          "spinal_alignment": {
+                              "landmarks": [
+                                  11,
+                                  23,
+                                  27
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "spinal_alignment": "Keep body in a straight line (Deviation: {deviation}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=pSHjTRCQxIw"
               },
-              "feedback": {
-                "spinal_alignment": "Keep body in a straight line (Deviation: {deviation}°)"
+              {
+                  "name": "Cat-Cow Stretch",
+                  "description": "On all fours, alternate between arching and rounding your back.",
+                  "parameters": {
+                      "joints": {
+                          "spinal_flexion": {
+                              "landmarks": [
+                                  11,
+                                  23,
+                                  27
+                              ],
+                              "ideal_angle": 90,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "spinal_flexion": "Alternate motion; adjust by {deviation}\u00b0 (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=kqnua4rHVVA"
               }
-            }
-          },
-          {
-            "name": "Cat-Cow Stretch",
-            "description": "On all fours, alternate between arching and rounding your back.",
-            "parameters": {
-              "joints": {
-                "spinal_flexion": {
-                  "landmarks": [11, 23, 27],
-                  "ideal_angle": 90,
-                  "threshold": 15
-                }
-              },
-              "feedback": {
-                "spinal_flexion": "Alternate motion; adjust by {deviation}° (Current: {current_angle}°)"
-              }
-            }
-          }
-        ]
+          ]
       },
       {
-        "category": "Cardiac Rehabilitation",
-        "exercises": [
-          {
-            "name": "Seated Marching",
-            "description": "Sit and march in place.",
-            "parameters": {
-              "joints": {
-                "knee_flexion": {
-                  "landmarks": [25, 26, 27],
-                  "ideal_angle": 90,
-                  "threshold": 15
-                }
+          "category": "Cardiac Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Seated Marching",
+                  "description": "Sit and march in place.",
+                  "parameters": {
+                      "joints": {
+                          "knee_flexion": {
+                              "landmarks": [
+                                  25,
+                                  26,
+                                  27
+                              ],
+                              "ideal_angle": 90,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "knee_flexion": "Lift knees higher (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=LV10w8lveOI"
               },
-              "feedback": {
-                "knee_flexion": "Lift knees higher (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Arm Raises",
-            "description": "Sit or stand and raise your arms to shoulder height.",
-            "parameters": {
-              "joints": {
-                "shoulder_elevation": {
-                  "landmarks": [11, 12, 15],
-                  "ideal_angle": 90,
-                  "threshold": 10
-                }
+              {
+                  "name": "Arm Raises",
+                  "description": "Sit or stand and raise your arms to shoulder height.",
+                  "parameters": {
+                      "joints": {
+                          "shoulder_elevation": {
+                              "landmarks": [
+                                  11,
+                                  12,
+                                  15
+                              ],
+                              "ideal_angle": 90,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "shoulder_elevation": "Raise arms evenly (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=vdARqUMKh7w"
               },
-              "feedback": {
-                "shoulder_elevation": "Raise arms evenly (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Step-Ups",
-            "description": "Step onto a low platform and step back down.",
-            "parameters": {
-              "joints": {
-                "knee_extension": {
-                  "landmarks": [25, 26, 27],
-                  "ideal_angle": 180,
-                  "threshold": 5
-                }
+              {
+                  "name": "Step-Ups",
+                  "description": "Step onto a low platform and step back down.",
+                  "parameters": {
+                      "joints": {
+                          "knee_extension": {
+                              "landmarks": [
+                                  25,
+                                  26,
+                                  27
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "knee_extension": "Fully extend knee (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=3-2q8w2ZJfE"
               },
-              "feedback": {
-                "knee_extension": "Fully extend knee (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Breathing Exercises",
-            "description": "Inhale deeply through the nose and exhale through the mouth.",
-            "parameters": {
-              "joints": {
-                "diaphragm_movement": {
-                  "landmarks": [11, 12],
-                  "ideal_movement": "smooth",
-                  "threshold": 1
-                }
+              {
+                  "name": "Breathing Exercises",
+                  "description": "Inhale deeply through the nose and exhale through the mouth.",
+                  "parameters": {
+                      "joints": {
+                          "diaphragm_movement": {
+                              "landmarks": [
+                                  11,
+                                  12
+                              ],
+                              "ideal_movement": "smooth",
+                              "threshold": 1
+                          }
+                      },
+                      "feedback": {
+                          "diaphragm_movement": "Breathe in a smooth, controlled manner"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=3cLAnK97FQw"
               },
-              "feedback": {
-                "diaphragm_movement": "Breathe in a smooth, controlled manner"
+              {
+                  "name": "Walking in Place",
+                  "description": "Walk in place at a steady pace.",
+                  "parameters": {
+                      "joints": {
+                          "gait": {
+                              "landmarks": [
+                                  25,
+                                  27
+                              ],
+                              "ideal_rate": 100,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "gait": "Maintain a steady pace (Deviation: {deviation} units)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=l_yvMQtkkDs"
               }
-            }
-          },
-          {
-            "name": "Walking in Place",
-            "description": "Walk in place at a steady pace.",
-            "parameters": {
-              "joints": {
-                "gait": {
-                  "landmarks": [25, 27],
-                  "ideal_rate": 100,
-                  "threshold": 15
-                }
-              },
-              "feedback": {
-                "gait": "Maintain a steady pace (Deviation: {deviation} units)"
-              }
-            }
-          }
-        ]
+          ]
       },
       {
-        "category": "Neurological Rehabilitation",
-        "exercises": [
-          {
-            "name": "Arm-Reaching Exercises",
-            "description": "Reach forward with one arm and return.",
-            "parameters": {
-              "joints": {
-                "arm_extension": {
-                  "landmarks": [11, 13, 15],
-                  "ideal_angle": 160,
-                  "threshold": 20
-                }
+          "category": "Neurological Rehabilitation",
+          "exercises": [
+              {
+                  "name": "Arm-Reaching Exercises",
+                  "description": "Reach forward with one arm and return.",
+                  "parameters": {
+                      "joints": {
+                          "arm_extension": {
+                              "landmarks": [
+                                  11,
+                                  13,
+                                  15
+                              ],
+                              "ideal_angle": 160,
+                              "threshold": 20
+                          }
+                      },
+                      "feedback": {
+                          "arm_extension": "Reach {deviation}\u00b0 further (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=3eKnt7a5Bls"
               },
-              "feedback": {
-                "arm_extension": "Reach {deviation}° further (Current: {current_angle}°)"
-              }
-            }
-          },
-          {
-            "name": "Seated Leg Extensions",
-            "description": "Sit and extend one leg at a time.",
-            "parameters": {
-              "joints": {
-                "knee_extension": {
-                  "landmarks": [25, 26, 27],
-                  "ideal_angle": 180,
-                  "threshold": 10
-                }
+              {
+                  "name": "Seated Leg Extensions",
+                  "description": "Sit and extend one leg at a time.",
+                  "parameters": {
+                      "joints": {
+                          "knee_extension": {
+                              "landmarks": [
+                                  25,
+                                  26,
+                                  27
+                              ],
+                              "ideal_angle": 180,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "knee_extension": "Fully extend your leg (Deviation: {deviation}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=o6DoZwOZ_xc"
               },
-              "feedback": {
-                "knee_extension": "Fully extend your leg (Deviation: {deviation}°)"
-              }
-            }
-          },
-          {
-            "name": "Standing Weight Shifts",
-            "description": "Stand and shift weight from one leg to the other.",
-            "parameters": {
-              "joints": {
-                "weight_shift": {
-                  "landmarks": [25, 27],
-                  "ideal_percentage": 50,
-                  "threshold": 10
-                }
+              {
+                  "name": "Standing Weight Shifts",
+                  "description": "Stand and shift weight from one leg to the other.",
+                  "parameters": {
+                      "joints": {
+                          "weight_shift": {
+                              "landmarks": [
+                                  25,
+                                  27
+                              ],
+                              "ideal_percentage": 50,
+                              "threshold": 10
+                          }
+                      },
+                      "feedback": {
+                          "weight_shift": "Keep weight evenly distributed (Current deviation: {deviation}%)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=lj9S68ChZQs"
               },
-              "feedback": {
-                "weight_shift": "Keep weight evenly distributed (Current deviation: {deviation}%)"
-              }
-            }
-          },
-          {
-            "name": "Heel-to-Toe Walk",
-            "description": "Walk in a straight line, placing the heel of one foot in front of the toes of the other.",
-            "parameters": {
-              "joints": {
-                "gait_alignment": {
-                  "landmarks": [25, 27],
-                  "ideal_angle": 0,
-                  "threshold": 5
-                }
+              {
+                  "name": "Heel-to-Toe Walk",
+                  "description": "Walk in a straight line, placing the heel of one foot in front of the toes of the other.",
+                  "parameters": {
+                      "joints": {
+                          "gait_alignment": {
+                              "landmarks": [
+                                  25,
+                                  27
+                              ],
+                              "ideal_angle": 0,
+                              "threshold": 5
+                          }
+                      },
+                      "feedback": {
+                          "gait_alignment": "Maintain straight-line walking (Deviation: {deviation}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=E9pLJfKU_p8"
               },
-              "feedback": {
-                "gait_alignment": "Maintain straight-line walking (Deviation: {deviation}°)"
+              {
+                  "name": "Finger-to-Nose Exercise",
+                  "description": "Touch your nose with your finger and then extend your arm.",
+                  "parameters": {
+                      "joints": {
+                          "arm_coordination": {
+                              "landmarks": [
+                                  11,
+                                  13,
+                                  15
+                              ],
+                              "ideal_angle": 160,
+                              "threshold": 15
+                          }
+                      },
+                      "feedback": {
+                          "arm_coordination": "Improve coordination by adjusting {deviation}\u00b0 (Current: {current_angle}\u00b0)"
+                      }
+                  },
+                  "link": "https://www.youtube.com/watch?v=X35Vo0CFP0E"
               }
-            }
-          },
-          {
-            "name": "Finger-to-Nose Exercise",
-            "description": "Touch your nose with your finger and then extend your arm.",
-            "parameters": {
-              "joints": {
-                "arm_coordination": {
-                  "landmarks": [11, 13, 15],
-                  "ideal_angle": 160,
-                  "threshold": 15
-                }
-              },
-              "feedback": {
-                "arm_coordination": "Improve coordination by adjusting {deviation}° (Current: {current_angle}°)"
-              }
-            }
-          }
-        ]
+          ]
       }
-    ],
-    "measurement_units": {
+  ],
+  "measurement_units": {
       "angles": "degrees",
       "distance": "centimeters",
       "speed": "cm/second"
-    },
-    "feedback_config": {
+  },
+  "feedback_config": {
       "critical_threshold": 15,
       "warning_threshold": 10,
-      "positive_reinforcement": ["Great form!", "Perfect execution!"]
-    },
-    "metadata": {
+      "positive_reinforcement": [
+          "Great form!",
+          "Perfect execution!"
+      ]
+  },
+  "metadata": {
       "landmark_reference": {
-        "11": "Left Shoulder",
-        "12": "Right Shoulder",
-        "13": "Left Elbow",
-        "14": "Right Elbow",
-        "15": "Left Wrist",
-        "23": "Left Hip",
-        "24": "Right Hip",
-        "25": "Left Knee",
-        "26": "Right Knee",
-        "27": "Left Ankle",
-        "31": "Left Heel",
-        "32": "Left Toe",
-        "33": "Right Toe"
+          "11": "Left Shoulder",
+          "12": "Right Shoulder",
+          "13": "Left Elbow",
+          "14": "Right Elbow",
+          "15": "Left Wrist",
+          "23": "Left Hip",
+          "24": "Right Hip",
+          "25": "Left Knee",
+          "26": "Right Knee",
+          "27": "Left Ankle",
+          "31": "Left Heel",
+          "32": "Left Toe",
+          "33": "Right Toe"
       },
       "threshold_rules": {
-        "critical": 15,
-        "warning": 10,
-        "optimal": 5
+          "critical": 15,
+          "warning": 10,
+          "optimal": 5
       }
-    }
   }
-  
+}

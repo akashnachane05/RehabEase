@@ -25,6 +25,7 @@ import {
 } from "chart.js";
 import axios from "axios";
 import io from "socket.io-client";
+import ProgressChart from "./ProgressChart";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -33,9 +34,7 @@ const PatientDashboard = () => {
   const [userSymptoms, setUserSymptoms] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [showAddExerciseForm, setShowAddExerciseForm] = useState(false);
-  const [feedback, setFeedback] = useState([]);
-  const [repCount, setRepCount] = useState(0);
-  const [setCount, setSetCount] = useState(0);
+
 
   const progressData = {
     labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
@@ -226,7 +225,7 @@ const PatientDashboard = () => {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Your Progress</h2>
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <Line data={progressData} />
+          < ProgressChart />
         </div>
       </div>
 
