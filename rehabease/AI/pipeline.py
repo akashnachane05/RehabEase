@@ -49,7 +49,7 @@ def process_exercise(socketio, pose, exercise, frame, width, height, rep_count, 
                 continue
 
             threshold = joint_data.get("threshold", 10)
-            deviation = round(abs(computed_value - ideal_value), 2)
+            deviation = round(abs(computed_value - ideal_value))
 
             # Feedback messages
             feedback_msg = f"{joint_name}: Keep adjusting!"
@@ -85,6 +85,7 @@ def process_exercise(socketio, pose, exercise, frame, width, height, rep_count, 
             # Rep Completion Condition
             if rep_started and computed_value < ideal_value:
                 rep_count += 1
+                rep_started=False 
                 print("✅ Rep completed!")  # Debugging
 
                 # Correct vs Incorrect Rep Count
@@ -95,7 +96,7 @@ def process_exercise(socketio, pose, exercise, frame, width, height, rep_count, 
                     incorrect_reps += 1
                     print("❌ Incorrect rep!")
 
-                rep_started = False  # Reset rep tracking
+                # rep_started = False  # Reset rep tracking
 
                 # Emit rep count updates
                 socketio.emit("rep_update", {
@@ -103,7 +104,7 @@ def process_exercise(socketio, pose, exercise, frame, width, height, rep_count, 
                     "correct_reps": correct_reps,
                     "incorrect_reps": incorrect_reps
                 })
-
+              
                 # Set Count Logic
                 if rep_count % 3 == 0:  # Assuming 10 reps per set
                     set_count += 1
@@ -112,15 +113,17 @@ def process_exercise(socketio, pose, exercise, frame, width, height, rep_count, 
                     if set_count >= 3:  # Stop after 3 sets
                         socketio.emit("exercise_complete", {"exercise": exercise["name"]})
                         return frame, feedback_msgs, rep_count, set_count, rep_started, correct_reps, incorrect_reps, True
+             
 
     except KeyError as e:
         print(f"❌ KeyError: {e} (Check exercise.json structure)")
 
     # Accuracy Calculation
     accuracy = (correct_reps / rep_count * 100) if rep_count > 0 else 0
+    
 
     # Overlay Information on Frame
-    cv2.putText(frame, f"Reps: {rep_count} (Correct: {correct_reps}, Incorrect: {incorrect_reps}, Sets: {set_count})",
+    cv2.putText(frame, f"Reps: {rep_count} (Correct: {correct_reps}, Incorrect: {incorrect_reps}, Sets: {set_count}, Accuracy : {accuracy}",
                 (50, height - 100), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1)
 
     return frame, feedback_msgs, rep_count, set_count, rep_started, correct_reps, incorrect_reps, False

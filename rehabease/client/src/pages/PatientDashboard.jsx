@@ -25,6 +25,7 @@ import {
 } from "chart.js";
 import axios from "axios";
 import io from "socket.io-client";
+import ProgressChart from "./ProgressChart";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -224,7 +225,7 @@ const PatientDashboard = () => {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Your Progress</h2>
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <Line data={progressData} />
+          < ProgressChart />
         </div>
       </div>
 

@@ -20,6 +20,7 @@ import TherapistProfiles from './pages/TherapistProfiles';
 import PatientProfiles from './pages/PatientProfiles';
 import Chat from './components/Chat';
 import ExerciseRequest from './pages/ExerciseRequest';
+import ProgressChart from './pages/ProgressChart';
 function App() {
   return (
     <ErrorBoundary>
@@ -59,6 +60,7 @@ const Main = () => {
           <Route path="/patient/therapist" element={<TherapistProfiles />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/request" element={<ExerciseRequest />} />
+          <Route path="/liveprogress" element={<ProgressChart />} />
         </Routes>
       </main>
       <Footer />

@@ -97,7 +97,6 @@ def process_exercise_stream():
         frame, feedback_msgs, rep_count, set_count, rep_started, correct_reps, incorrect_reps, completed = process_exercise(
             socketio, pose, current_exercise, frame, width, height, rep_count, set_count, rep_started, correct_reps, incorrect_reps
         )
-
         _, buffer = cv2.imencode('.jpg', frame)
         frame_bytes = buffer.tobytes()
         socketio.emit("video_frame", frame_bytes)
@@ -112,14 +111,13 @@ def process_exercise_stream():
     print("✅ Exercise session ended!")
     generate_final_report()
 
-
 def generate_final_report():
     report_data = {
         "timestamp": datetime.datetime.now().isoformat(),
         "exercise_name": current_exercise["name"],
         "sets": set_count,
         "reps": rep_count,
-        "accuracy": round((correct_reps / correct_reps + incorrect_reps * 100) if rep_count > 0 else 100, 2),
+        "accuracy": round((correct_reps / rep_count * 100) if rep_count > 0 else 100, 2),
         }
     
     genai.configure(api_key="AIzaSyBDMYAX4pPgl0XO9wUwIEatNI3EdgHmYeU")
