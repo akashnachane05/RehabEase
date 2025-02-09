@@ -9,6 +9,8 @@ import datetime
 import google.generativeai as genai
 from pipeline import process_exercise
 import re
+import requests
+
 
 
 app = Flask(__name__)
@@ -31,7 +33,6 @@ def load_exercise_data():
         print(f"❌ Error loading exercises: {e}")
         exercises_data = {}
 
-
 def open_webcam():
     for cam_index in range(3):
         cap = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)
@@ -42,7 +43,6 @@ def open_webcam():
         cap.release()
     print("❌ No available webcam found!")
     return None
-
 
 @app.route('/api/start-exercise', methods=['POST'])
 def start_exercise():
@@ -114,8 +114,16 @@ def process_exercise_stream(user_id):
     generate_final_report(user_id)
 
 def generate_final_report(user_id):
+    response = requests.get(f"http://localhost:5000/api/patient/{user_id}")
+    if response.status_code == 200:
+        patient_data = response.json()
+        patient_name = patient_data["name"]
+        print(f"👤 Patient Name: {patient_name}")
+    else:
+        patient_name = "Unknown"
     report_data = {
         "user_id": user_id,
+        "Patient_Name" : patient_name,
         "timestamp": datetime.datetime.now().isoformat(),
         "exercise_name": current_exercise["name"],
         "sets": set_count,

@@ -21,6 +21,8 @@ import PatientProfiles from './pages/PatientProfiles';
 import Chat from './components/Chat';
 import ExerciseRequest from './pages/ExerciseRequest';
 import ProgressChart from './pages/ProgressChart';
+import ProtectedRoute from './components/ProtectedRoute';
+import RehabRecommendationPage from './pages/RecommendationAI';
 function App() {
   return (
     <ErrorBoundary>
@@ -51,16 +53,39 @@ const Main = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/therapist/login" element={<TherapistLoginPage />} />
           <Route path="/therapist/register" element={<TherapistRegisterPage />} />
-          <Route path="/patient/dashboard" element={<PatientDashboard />} />
-          <Route path="/therapist/dashboard" element={<TherapistDashboard />} />
-          <Route path="/exercise" element={<ExerciseLibrary />} />
-          <Route path="/patients/profile" element={<PatientProfilePage />} />
-          <Route path="/therapist/profile" element={<TherapistProfile />} />
-          <Route path="/therapist/patients" element={<PatientProfiles />} />
-          <Route path="/patient/therapist" element={<TherapistProfiles />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/request" element={<ExerciseRequest />} />
-          <Route path="/liveprogress" element={<ProgressChart />} />
+          <Route path="/patient/dashboard" element={ <ProtectedRoute>
+              <PatientDashboard />
+            </ProtectedRoute>} />
+          <Route path="/therapist/dashboard" element={ <ProtectedRoute>
+              <TherapistDashboard />
+            </ProtectedRoute>} />
+          <Route path="/exercise" element={ <ProtectedRoute>
+              <ExerciseLibrary />
+            </ProtectedRoute>} />
+          <Route path="/patients/profile" element={ <ProtectedRoute>
+              <PatientProfilePage />
+            </ProtectedRoute>} />
+          <Route path="/therapist/profile" element={ <ProtectedRoute>
+              <TherapistProfile />
+            </ProtectedRoute>} />
+          <Route path="/therapist/patients" element={<ProtectedRoute>
+              <PatientProfiles />
+            </ProtectedRoute>} />
+          <Route path="/patient/therapist" element={<ProtectedRoute>
+              <TherapistProfiles />
+            </ProtectedRoute>} />
+          <Route path="/chat" element={<ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>} />
+          <Route path="/request" element={<ProtectedRoute>
+              <ExerciseRequest />
+            </ProtectedRoute>} />
+          <Route path="/liveprogress" element={<ProtectedRoute>
+              <ProgressChart />
+            </ProtectedRoute>} />
+          <Route path="/recommend" element={<ProtectedRoute>
+              <RehabRecommendationPage />
+            </ProtectedRoute>} />
         </Routes>
       </main>
       <Footer />

@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-
 const ExerciseProgressChart = () => {
   const [progressData, setProgressData] = useState([]);
   const token = localStorage.getItem("authToken");
 
   useEffect(() => {
-    if (!token) {
-      console.log("No auth token found.");
-      return;
-    }
+   
 
     fetch("http://localhost:5000/exercise-report", {
       method: "GET",
@@ -79,6 +75,8 @@ const ExerciseProgressChart = () => {
         <table className="min-w-full bg-white">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <th className="py-3 px-6 text-left">Name</th>
+              <th className="py-3 px-6 text-left">Exercise</th>
               <th className="py-3 px-6 text-left">Timestamp</th>
               <th className="py-3 px-6 text-left">Accuracy (%)</th>
               <th className="py-3 px-6 text-left">Reps</th>
@@ -89,6 +87,8 @@ const ExerciseProgressChart = () => {
           <tbody className="text-gray-600 text-sm font-light">
             {progressData.map((entry, index) => (
               <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
+                <td className="py-3 px-6 text-left">{entry.Patient_Name}</td>
+                <td className="py-3 px-6 text-left">{entry.exercise_name}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">{formatTimestamp(entry.timestamp)}</td>
                 <td className="py-3 px-6 text-left">{entry.accuracy}</td>
                 <td className="py-3 px-6 text-left">{entry.reps}</td>

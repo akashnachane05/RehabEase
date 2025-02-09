@@ -12,7 +12,7 @@ import {
   BarChart2,
   MessageCircle,
 } from "lucide-react";
-import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -184,13 +184,19 @@ const PatientDashboard = () => {
       )}
 
       {/* Cards Section */}
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
         <div className="bg-blue-500 text-white rounded-lg p-6 shadow-lg">
           <Activity className="w-8 h-8 mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">Next Session</h2>
-          <p className="text-lg">Today at 2:00 PM</p>
-          <p className="text-sm mt-2">Shoulder Exercises</p>
+          <h2 className="text-2xl font-semibold mb-2">Get Tailored Recommendation</h2>
+          <Link 
+            to="/recommend" 
+            className="mt-4 inline-block bg-white text-blue-500 font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 hover:text-white transition duration-300"
+          >
+            Explore Now
+          </Link>
         </div>
+    
+
 
         <div className="bg-green-500 text-white rounded-lg p-6 shadow-lg">
           <Calendar className="w-8 h-8 mb-4" />

@@ -19,7 +19,7 @@ const Chat = ({ patient, therapist }) => {
   // Get current user from localStorage
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const senderId = currentUser?._id;
-  const senderType = currentUser?.role;
+  const senderType = currentUser?.role ?  "Patient" : "Therapist";
   const recipientId = patient?._id || therapist?._id;
   const recipientType = patient ? "Patient" : "Therapist";
 

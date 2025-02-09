@@ -27,11 +27,9 @@ function TherapistRegisterPage() {
       // Send POST request to backend API
       const response = await axios.post('http://localhost:5000/api/therapists/register', formData);
       console.log('Registration successful:', response.data);
-      alert('Registration successful!');
       navigate('/therapist/login');
     } catch (error) {
       console.error('There was an error registering the patient!', error);
-      alert('Registration failed. Please try again.');
     }
     
   };

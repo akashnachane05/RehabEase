@@ -8,7 +8,7 @@ function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Link to="/" className="flex items-center space-x-2">
+            <Link  className="flex items-center space-x-2">
               <HandHeart className="h-8 w-8 text-blue-600" />
               <span className="text-xl font-bold text-gray-900">RehabEase</span>
             </Link>

@@ -2,6 +2,7 @@
     "679df0ea72438e96860c7aef": [
         {
             "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
             "timestamp": "2025-02-09T02:52:32.365194",
             "exercise_name": "Pendulum Swings",
             "sets": 0,
@@ -11,6 +12,7 @@
         },
         {
             "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
             "timestamp": "2025-02-09T02:54:37.102202",
             "exercise_name": "Pendulum Swings",
             "sets": 0,
@@ -20,6 +22,7 @@
         },
         {
             "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
             "timestamp": "2025-02-09T03:09:00.134838",
             "exercise_name": "Pendulum Swings",
             "sets": 1,
@@ -29,17 +32,79 @@
         },
         {
             "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
             "timestamp": "2025-02-09T03:07:30.739938",
             "exercise_name": "Pendulum Swings",
             "sets": 1,
             "reps": 5,
             "accuracy": 60.0,
             "summary": "Your Pendulum Swing exercise session was a good start, completing 1 set of 5 reps. However, the accuracy level was only 60%. To improve your accuracy, focus on maintaining a steady and controlled movement throughout the exercise. Remember, consistency and gradual progression are key to enhancing your technique. Continue practicing regularly and monitor your progress to see improvements over time."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T07:58:00.559569",
+            "exercise_name": "Pendulum Swings",
+            "sets": 3,
+            "reps": 9,
+            "accuracy": 55.56,
+            "summary": "Your progress with the Pendulum Swings exercise is commendable, with an accuracy rate of 55.56%. To enhance your performance further, aim for greater precision in your swings. Completing 9 repetitions in 3 sets demonstrates your consistency and effort. Keep up the good work, and strive to improve your accuracy with each session."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T08:00:28.420876",
+            "exercise_name": "Pendulum Swings",
+            "sets": 0,
+            "reps": 0,
+            "accuracy": 100,
+            "summary": "Your recent Pendulum Swing exercise session shows great accuracy. While specific details on sets and reps are missing, it's important to maintain consistency in your form to maximize benefits. Remember to engage your core and keep your movements fluid. As you continue your journey, focus on gradually increasing the number of sets and reps to challenge your body and enhance your progress."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Unknown",
+            "timestamp": "2025-02-09T10:38:58.473169",
+            "exercise_name": "Pendulum Swings",
+            "sets": 3,
+            "reps": 9,
+            "accuracy": 44.44,
+            "summary": "Overall, your exercise session for Pendulum Swings shows great effort! You have completed 3 sets of 9 repetitions with an accuracy of 44.44%. This is a good starting point to improve your range of motion and coordination. However, for greater progress, try focusing on maintaining accuracy throughout each repetition. Additionally, consider gradually increasing the range of motion and duration of each swing to challenge your body further. Keep up the good work and you will see significant results over time!"
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Unknown",
+            "timestamp": "2025-02-09T10:40:58.388428",
+            "exercise_name": "Pendulum Swings",
+            "sets": 0,
+            "reps": 0,
+            "accuracy": 100,
+            "summary": "Today's pendulum swing exercise session yielded mixed results. While your accuracy was commendable at 100%, we couldn't log any sets or reps due to a technical glitch. You're encouraged to repeat this exercise in your next session, focusing on maintaining accuracy while gradually increasing the number of sets and reps performed. This will help improve your balance and coordination over time."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T10:49:43.031013",
+            "exercise_name": "Pendulum Swings",
+            "sets": 2,
+            "reps": 6,
+            "accuracy": 66.67,
+            "summary": "Akash, your Pendulum Swings exercise session today was a good start. You've completed 2 sets of 6 repetitions, with an accuracy of 66.67%. To enhance your accuracy, focus on maintaining a steady and controlled movement throughout the exercise. Pay attention to keeping your core engaged and your back straight. With consistent practice, you should notice a gradual improvement in your accuracy. Keep up the great work!"
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T10:55:43.467129",
+            "exercise_name": "Seated Leg Extensions",
+            "sets": 0,
+            "reps": 0,
+            "accuracy": 100,
+            "summary": "Akash, while your accuracy was great, it appears that you haven't started the exercise session yet. To see the most benefits, it's important to complete the recommended number of sets and repetitions. Once you've completed the exercise, we can review your performance and provide feedback on technique and progress."
         }
     ],
     "679e47f51971f86d07e0ccb1": [
         {
             "user_id": "679e47f51971f86d07e0ccb1",
+            "Patient_Name": "Soham Deshmukh",
             "timestamp": "2025-02-09T02:55:25.735318",
             "exercise_name": "Pendulum Swings",
             "sets": 0,
@@ -49,6 +114,7 @@
         },
         {
             "user_id": "679e47f51971f86d07e0ccb1",
+            "Patient_Name": "Soham Deshmukh",
             "timestamp": "2025-02-09T02:57:15.930178",
             "exercise_name": "Ankle Pumps",
             "sets": 0,
@@ -60,6 +126,7 @@
     "67a6fe36ba1484bc4eae111f": [
         {
             "user_id": "67a6fe36ba1484bc4eae111f",
+            "Patient_Name": "test",
             "timestamp": "2025-02-09T03:05:09.280919",
             "exercise_name": "Pendulum Swings",
             "sets": 0,

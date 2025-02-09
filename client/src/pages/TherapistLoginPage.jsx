@@ -30,8 +30,6 @@ function TherapistLoginPage() {
       // Redirect user to a different page (e.g., dashboard) after successful login
       // You can use React Router's `useNavigate()` to navigate
       navigate('/therapist/dashboard');
-
-      alert('Login successful!'); // Success message
     } catch (err) {
       // Handle error
       console.error('Error logging in:', err);

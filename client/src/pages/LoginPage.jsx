@@ -41,7 +41,7 @@ function LoginPage() {
       // Redirect user to a different page (e.g., dashboard) after successful login
       // You can use React Router's `useNavigate()` to navigate
       navigate('/patient/dashboard');
-      alert('Login successful!'); // Success message
+     
       
     } catch (err) {
       // Handle error

@@ -78,7 +78,7 @@ app.get("/exercise-report", verifyToken, async(req, res) => {
   const user_id = req.user.id;
   const user_role = req.user.role; // Get the role from the verified token
   const filePath = "../AI/final_exercise_reports.json"; // Adjust path as per folder structure
-  
+  const patient = await Patient.findById(user_id);
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).json({ error: "Failed to read file" });
@@ -113,8 +113,16 @@ app.get("/exercise-report", verifyToken, async(req, res) => {
   });
 });
 
+app.get("/api/patient/:user_id", async (req, res) => {
+  try {
+      const patient = await Patient.findById( req.params.user_id );
+      if (!patient) return res.status(404).json({ message: "Patient not found" });
 
-
+      res.json(patient);
+  } catch (error) {
+      res.status(500).json({ error: "Server Error" });
+  }
+});
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
