@@ -10,6 +10,7 @@ import google.generativeai as genai
 from pipeline import process_exercise
 import re
 
+
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -52,9 +53,11 @@ def start_exercise():
         return jsonify({"success": False, "message": "Exercise data not found!"}), 500
 
     data = request.json
+    user_id = data.get("user_id")  # Get user ID from request
     exercise_name = data.get("exercise_name")
-    if not exercise_name:
-        return jsonify({"success": False, "message": "No exercise specified!"}), 400
+
+    if not user_id or not exercise_name:
+        return jsonify({"success": False, "message": "User ID and exercise name required!"}), 400
 
     found = False
     for category in exercises_data.get("exercises", []):
@@ -74,11 +77,10 @@ def start_exercise():
     if cap is None:
         return jsonify({"success": False, "message": "Webcam access failed!"}), 500
 
-    socketio.start_background_task(process_exercise_stream)
+    socketio.start_background_task(process_exercise_stream, user_id)  # Pass user ID
     return jsonify({"success": True, "message": f"Exercise '{current_exercise['name']}' started!"})
 
-
-def process_exercise_stream():
+def process_exercise_stream(user_id):
     global cap, current_exercise, rep_count, set_count, rep_started, correct_reps, incorrect_reps
     
     if cap is None or current_exercise is None:
@@ -109,17 +111,19 @@ def process_exercise_stream():
     cap.release()
     cv2.destroyAllWindows()
     print("✅ Exercise session ended!")
-    generate_final_report()
+    generate_final_report(user_id)
 
-def generate_final_report():
+def generate_final_report(user_id):
     report_data = {
+        "user_id": user_id,
         "timestamp": datetime.datetime.now().isoformat(),
         "exercise_name": current_exercise["name"],
         "sets": set_count,
         "reps": rep_count,
         "accuracy": round((correct_reps / rep_count * 100) if rep_count > 0 else 100, 2),
-        }
+    }
     
+    # Generate AI-based feedback
     genai.configure(api_key="AIzaSyBDMYAX4pPgl0XO9wUwIEatNI3EdgHmYeU")
     prompt = f"""
     Generate a summary for the following exercise session like an actual therapist. Provide proper feedback, 
@@ -129,22 +133,27 @@ def generate_final_report():
     model = genai.GenerativeModel("gemini-pro")
     response = model.generate_content(prompt)
     report_data["summary"] = response.text if response.text else "No valid response received."
-    filename = "final_exercise_report.json"
+
+    # Store user-specific reports
+    filename = "final_exercise_reports.json"
     try:
         with open(filename, "r") as f:
             reports = json.load(f)
-        if not isinstance(reports, list):
-            reports = [reports]
+        if not isinstance(reports, dict):
+            reports = {}
     except (FileNotFoundError, json.JSONDecodeError):
-        reports = []
+        reports = {}
 
-    reports.append(report_data)
+    if user_id not in reports:
+        reports[user_id] = []  # Create a new list for the user
+
+    reports[user_id].append(report_data)  # Append the report to the user's history
+
     with open(filename, "w") as f:
         json.dump(reports, f, indent=4)
 
-    print("✅ Final report generated and saved!")
+    print(f"✅ Final report for User {user_id} generated and saved!")
     socketio.emit("final_report", report_data)
-
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

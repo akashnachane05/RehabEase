@@ -36,17 +36,7 @@ const PatientDashboard = () => {
   const [showAddExerciseForm, setShowAddExerciseForm] = useState(false);
 
 
-  const progressData = {
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
-    datasets: [
-      {
-        label: "Overall Progress",
-        data: [30, 45, 60, 75],
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  };
+  
 
   
   useEffect(() => {

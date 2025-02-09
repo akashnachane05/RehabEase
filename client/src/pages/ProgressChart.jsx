@@ -1,19 +1,43 @@
-import React, { useState, useEffect } from "react"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
+import React, { useState, useEffect } from "react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const ExerciseProgressChart = () => {
-  const [progressData, setProgressData] = useState([])
+  const [progressData, setProgressData] = useState([]);
+  const token = localStorage.getItem("authToken");
 
   useEffect(() => {
-    fetch("http://localhost:5000/exercise-report") // Fetch JSON from backend
-      .then((response) => response.json())
-      .then((data) => setProgressData(data))
-      .catch((error) => console.error("Error loading JSON:", error))
-  }, [])
+    if (!token) {
+      console.log("No auth token found.");
+      return;
+    }
+
+    fetch("http://localhost:5000/exercise-report", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`, // Send token in the Authorization header
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        if (Array.isArray(data.reports)) {
+          setProgressData(data.reports); // If it's an array, set directly
+        } else if (typeof data.reports === "object") {
+          // Convert the object to an array of all reports
+          const allReports = Object.values(data.reports).flat(); // Merge all user reports into a single array
+          setProgressData(allReports);
+        } else {
+          console.error("Invalid data format:", data);
+        }
+      }
+    })
+    .catch((error) => console.error("Error fetching reports:", error));
+  }, [token]);
 
   const formatTimestamp = (timestamp) => {
-    return new Date(timestamp).toLocaleString()
-  }
+    return new Date(timestamp).toLocaleString(); // Format timestamp for display
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 bg-gray-100 min-h-screen">
@@ -76,7 +100,7 @@ const ExerciseProgressChart = () => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ExerciseProgressChart
+export default ExerciseProgressChart;
