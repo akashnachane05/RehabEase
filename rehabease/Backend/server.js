@@ -9,6 +9,7 @@ const axios = require("axios"); // For calling Flask API
 const Message = require('./models/Message'); // Import the Message model
 const jwt = require('jsonwebtoken');
 const verifyToken = require('./middlewares/authMiddleware');
+const Patient = require("./models/Patient");
 fs = require('fs');
 dotenv.config();
 
@@ -46,33 +47,74 @@ app.use("/api/chat", chatRoutes);
 //         res.status(500).json({ success: false, message: "Failed to start exercise" });
 //     }
 // });
-app.post("/api/start-exercise", async (req, res) => {
+app.post("/api/start-exercise", verifyToken, async (req, res) => {
   try {
-      const { exercise_name } = req.body;
-    
+    const { exercise_name } = req.body
 
-      if (!exercise_name) {
-          return res.status(400).json({ success: false, message: "Exercise name required!" });
-      }
+    if (!exercise_name) {
+      return res.status(400).json({ success: false, message: "Exercise name required!" })
+    }
 
-      console.log(`Starting exercise: ${exercise_name}`);
-      const response = await axios.post("http://127.0.0.1:5000/api/start-exercise", { exercise_name });
-      res.json(response.data);
+    // Get the user ID and role from the verified token
+    const userId = req.user.id // Extracted from the token by the middleware
+    const userRole = req.user.role // 'patient' or 'therapist'
+
+    console.log(`User ${userId} (${userRole}) is starting exercise: ${exercise_name}`)
+
+    // Send user ID along with exercise name to the external API
+    const response = await axios.post("http://127.0.0.1:5000/api/start-exercise", { 
+      user_id: userId,
+      exercise_name 
+    })
+
+    res.json(response.data)
   } catch (error) {
-      console.error("Error starting specific exercise:", error.response?.data || error.message);
-      res.status(500).json({ success: false, message: "Failed to start exercise" });
+    console.error("❌ Error starting specific exercise:", error.response?.data || error.message)
+    res.status(500).json({ success: false, message: "Failed to start exercise" })
   }
-});
+})
 
-app.get("/exercise-report", (req, res) => {
-  const filePath =  "../AI/final_exercise_report.json" // Adjust path as per folder structure
+app.get("/exercise-report", verifyToken, async(req, res) => {
+  const user_id = req.user.id;
+  const user_role = req.user.role; // Get the role from the verified token
+  const filePath = "../AI/final_exercise_reports.json"; // Adjust path as per folder structure
+  
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).json({ error: "Failed to read file" });
     }
-    res.json(JSON.parse(data));
+
+    let reports;
+    try {
+      reports = JSON.parse(data); // Parse the JSON data
+    } catch (parseError) {
+      return res.status(500).json({ error: "Failed to parse report data" });
+    }
+
+    console.log("User Role:", user_role); // Debugging log
+
+    if (user_role === "therapist") {
+      // If the user is a therapist, return all reports
+      return res.json({
+        success: true,
+        reports: reports
+      });
+    } else {
+      // If the user is not a therapist, return only their reports
+      if (!reports[user_id]) {
+        return res.status(404).json({ error: `No reports found for user ID ${user_id}` });
+      }
+
+      return res.json({
+        success: true,
+        reports: reports[user_id],
+      });
+    }
   });
 });
+
+
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {

@@ -110,9 +110,13 @@ const ExerciseList = () => {
   }, [])
 
   const handleStartExercise = (exerciseName) => {
+    const token = localStorage.getItem("authToken")
     fetch("http://localhost:5000/api/start-exercise", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // Adding the token here
+      },
       body: JSON.stringify({ exercise_name: exerciseName }),
     })
       .then((res) => res.json())
