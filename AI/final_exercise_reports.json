@@ -99,6 +99,36 @@
             "reps": 0,
             "accuracy": 100,
             "summary": "Akash, while your accuracy was great, it appears that you haven't started the exercise session yet. To see the most benefits, it's important to complete the recommended number of sets and repetitions. Once you've completed the exercise, we can review your performance and provide feedback on technique and progress."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T11:02:29.261637",
+            "exercise_name": "Pendulum Swings",
+            "sets": 3,
+            "reps": 9,
+            "accuracy": 66.67,
+            "summary": "Akash, during your Pendulum Swings exercise, you completed 3 sets with 9 repetitions each at an accuracy of 66.67%. This is a good starting point, but we can aim to improve accuracy in your next session. Focus on maintaining a steady and controlled motion, keeping your movements smooth and consistent. Remember, it's about quality over quantity, so concentrate on executing each repetition with precision. By refining your technique, you'll enhance the effectiveness of this exercise and progress towards your recovery goals."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T11:54:36.730900",
+            "exercise_name": "Arm Circles",
+            "sets": 3,
+            "reps": 9,
+            "accuracy": 44.44,
+            "summary": "Akash, you recently completed the \"Arm Circles\" exercise with a 44.44% accuracy rate. While you performed 3 sets of 9 repetitions, it's essential to focus on accuracy rather than quantity. Next time, aim to maintain proper form throughout the exercise. This will improve your technique and contribute to more effective results. Remember, quality over quantity is key."
+        },
+        {
+            "user_id": "679df0ea72438e96860c7aef",
+            "Patient_Name": "Akash Nachane ",
+            "timestamp": "2025-02-09T18:25:28.465495",
+            "exercise_name": "Pendulum Swings",
+            "sets": 3,
+            "reps": 9,
+            "accuracy": 66.67,
+            "summary": "Akash, you completed 3 sets of 9 reps of Pendulum Swings with an accuracy of 67%. You've made great progress in finding the right rhythm and maintaining your balance. To improve your accuracy, focus on controlling the range of your swings and keeping your body centered. Keep practicing, and you'll continue to strengthen your core and improve your posture."
         }
     ],
     "679e47f51971f86d07e0ccb1": [
