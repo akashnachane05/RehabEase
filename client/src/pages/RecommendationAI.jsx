@@ -5,7 +5,7 @@ import axios from "axios"
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
 // Configure Gemini API
-const genAI = new GoogleGenerativeAI("AIzaSyBDMYAX4pPgl0XO9wUwIEatNI3EdgHmYeU")
+const genAI = new GoogleGenerativeAI("AIzaSyBJtrUKux6dceO0KpxwD9YAbck8pn0l7Ho")
 
 async function recommendRehabWithGemini(symptoms, exercisesData) {
   const prompt = `
@@ -16,7 +16,7 @@ async function recommendRehabWithGemini(symptoms, exercisesData) {
     Recommend the most suitable rehabilitation exercise in one or two words.
   `
 
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" })
+  const model = genAI.getGenerativeModel({ model: "models/gemini-2.0-flash" })
   const response = await model.generateContent(prompt)
 
   return response.response.text()

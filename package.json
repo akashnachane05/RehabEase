@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "cd backend && npm i && nodemon server.js",
     "client": "cd client && npm i && npm run dev",
-    "dev": "concurrently -k  \"npm run backend\" \"npm run client\""
+    "AI":"cd AI && py app1.py",
+    "dev": "concurrently -k  \"npm run backend\" \"npm run client\" \"npm run AI\""
   },
   "repository": {
     "type": "git",

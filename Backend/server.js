@@ -58,9 +58,9 @@ app.post("/api/start-exercise", verifyToken, async (req, res) => {
     // Get the user ID and role from the verified token
     const userId = req.user.id // Extracted from the token by the middleware
     const userRole = req.user.role // 'patient' or 'therapist'
-
+ 
     console.log(`User ${userId} (${userRole}) is starting exercise: ${exercise_name}`)
-
+  
     // Send user ID along with exercise name to the external API
     const response = await axios.post("http://127.0.0.1:5000/api/start-exercise", { 
       user_id: userId,

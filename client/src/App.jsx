@@ -23,6 +23,7 @@ import ExerciseRequest from './pages/ExerciseRequest';
 import ProgressChart from './pages/ProgressChart';
 import ProtectedRoute from './components/ProtectedRoute';
 import RehabRecommendationPage from './pages/RecommendationAI';
+import RehabChatbot from './components/RehabChatbot';
 function App() {
   return (
     <ErrorBoundary>
@@ -53,6 +54,7 @@ const Main = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/therapist/login" element={<TherapistLoginPage />} />
           <Route path="/therapist/register" element={<TherapistRegisterPage />} />
+          <Route path="/chatbot" element={<RehabChatbot/>}/>
           <Route path="/patient/dashboard" element={ <ProtectedRoute>
               <PatientDashboard />
             </ProtectedRoute>} />

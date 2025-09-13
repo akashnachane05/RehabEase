@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { HandHeart, Activity, Calendar, Video } from "lucide-react"
 import { motion } from "framer-motion"
-
+import RehabChatbot from "../components/RehabChatbot"
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -37,6 +37,12 @@ function HomePage() {
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
             >
               Get Started
+            </Link>
+             <Link
+              to="/chatbot"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+            >
+              Get Recommendation
             </Link>
             <Link
               to="/about"

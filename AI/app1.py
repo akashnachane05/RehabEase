@@ -10,6 +10,7 @@ import google.generativeai as genai
 from pipeline import process_exercise
 import re
 import requests
+import os
 
 
 
@@ -132,13 +133,13 @@ def generate_final_report(user_id):
     }
     
     # Generate AI-based feedback
-    genai.configure(api_key="AIzaSyBDMYAX4pPgl0XO9wUwIEatNI3EdgHmYeU")
+    genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
     prompt = f"""
     Generate a summary for the following exercise session like an actual therapist. Provide proper feedback, 
     highlight improvements required, and summarize in simple terms so a user can easily understand. Generate just one paragraph in short:
     {json.dumps(report_data, indent=4)}
     """
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("models/gemini-2.0-flash")
     response = model.generate_content(prompt)
     report_data["summary"] = response.text if response.text else "No valid response received."
 
@@ -164,4 +165,4 @@ def generate_final_report(user_id):
     socketio.emit("final_report", report_data)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True ,allow_unsafe_werkzeug=True)
